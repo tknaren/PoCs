@@ -8,12 +8,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<SalesDatabaseSettings>(builder.Configuration.GetSection("SalesDatabase"));
 
 // Add to the Dependency Injection container. This creates the singleton instance upfront and will be shared when required
-builder.Services.AddSingleton<SalesService>();
+builder.Services.AddSingleton(typeof(ISalesService), typeof(SalesService));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddApplicationInsightsTelemetry(builder.Configuration["APPINSIGHTS_CONNECTIONSTRING"]);
+
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
 
 var app = builder.Build();
 

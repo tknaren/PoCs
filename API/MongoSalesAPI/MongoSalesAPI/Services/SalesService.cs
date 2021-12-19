@@ -4,7 +4,7 @@ using MongoDB.Driver;
 
 namespace MongoSalesAPI.Services;
 
-public class SalesService
+public class SalesService : ISalesService
 {
     private readonly IMongoCollection<Sale> _salesCollection;
 

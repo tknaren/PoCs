@@ -8,9 +8,14 @@ namespace MongoSalesAPI.Controllers;
 [Route("api/[controller]")]
 public class SalesController : Controller
 {
-    private readonly SalesService _salesService;
+    private readonly ISalesService _salesService;
+    private readonly ILogger _logger;
 
-    public SalesController(SalesService salesService) => _salesService = salesService;
+    public SalesController(ISalesService salesService, ILogger<SalesController> logger) 
+    {
+        _salesService = salesService;
+        _logger = logger;
+    }
 
     [HttpGet]
     public async Task<List<Sale>> Get() => await _salesService.GetSalesAsync();
@@ -22,7 +27,10 @@ public class SalesController : Controller
 
         if(sale == null)
         {
-            return NotFound();  
+            _logger.LogWarning("No data found for " + id);
+
+            return NotFound();
+            
         }
 
         return Ok(sale);
@@ -32,6 +40,8 @@ public class SalesController : Controller
     public async Task<IActionResult> Post(Sale newSale)
     {
         await _salesService.CreateAsync(newSale);
+
+        _logger.LogInformation("New Sale created " + newSale.Id);
 
         //return the status-201, okay response with created object. So call the get method with the newly created objectid.
         return CreatedAtAction(nameof(Get), new { id = newSale.Id }, newSale);
@@ -45,12 +55,17 @@ public class SalesController : Controller
 
         if (sale is null)
         {
+            _logger.LogWarning("No data found for " + id);
+
             return NotFound();
         }
+
 
         updatedSale.Id = sale.Id;
 
         await _salesService.UpdateAsync(id, updatedSale);
+
+        _logger.LogInformation("Sale got updated " + id);
 
         //returns the Status-204 - Okay but NoContent response
         return NoContent();
@@ -63,10 +78,14 @@ public class SalesController : Controller
 
         if (book is null)
         {
+            _logger.LogWarning("No data found for " + id);
+
             return NotFound();
         }
 
         await _salesService.DeleteAsync(id);
+
+        _logger.LogInformation("Sale got deleted " + id);
 
         //returns the Status-204 - Okay but NoContent response
         return NoContent();

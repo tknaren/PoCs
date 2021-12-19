@@ -1,0 +1,84 @@
+{
+  "saleDate": "2017-12-03T18:39:48.253Z",
+  "items": [
+    {
+      "name": "cofeecup",
+      "tags": [
+        "general",
+        "kids"
+      ],
+      "price": 2.59,
+      "quantity": 3
+    },
+    {
+      "name": "notepad",
+      "tags": [
+        "office",
+        "writing",
+        "school"
+      ],
+      "price": 10.6,
+      "quantity": 4
+    },
+    {
+      "name": "binder",
+      "tags": [
+        "school",
+        "general",
+        "organization"
+      ],
+      "price": 18.67,
+      "quantity": 2
+    },
+    {
+      "name": "pens",
+      "tags": [
+        "writing",
+        "office",
+        "school",
+        "stationary"
+      ],
+      "price": 60.56,
+      "quantity": 3
+    },
+    {
+      "name": "notepad",
+      "tags": [
+        "office",
+        "writing",
+        "school"
+      ],
+      "price": 28.41,
+      "quantity": 1
+    },
+    {
+      "name": "envelopes",
+      "tags": [
+        "stationary",
+        "office",
+        "general"
+      ],
+      "price": 15.28,
+      "quantity": 7
+    },
+    {
+      "name": "laptop",
+      "tags": [
+        "electronics",
+        "school",
+        "office"
+      ],
+      "price": 1259.02,
+      "quantity": 3
+    }
+  ],
+  "storeLocation": "Chennai",
+  "customer": {
+    "gender": "M",
+    "age": 41,
+    "email": "someone@ib.sh",
+    "satisfaction": 5
+  },
+  "couponUsed": false,
+  "purchaseMethod": "In store"
+}
